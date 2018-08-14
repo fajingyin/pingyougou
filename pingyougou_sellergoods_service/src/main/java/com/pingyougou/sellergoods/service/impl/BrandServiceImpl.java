@@ -11,6 +11,7 @@ import com.pingyougou.sellergoods.service.BrandService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -53,9 +54,10 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void delete(Long[] ids) {
-        for (Long id : ids) {
-            tbBrandMapper.deleteByPrimaryKey(id);
-        }
+        TbBrandExample example = new TbBrandExample();
+        TbBrandExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(Arrays.asList(ids));
+        tbBrandMapper.deleteByExample(example);
 
     }
 

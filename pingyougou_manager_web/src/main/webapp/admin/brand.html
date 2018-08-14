@@ -15,15 +15,20 @@
 	<script type="text/javascript" src="../plugins/angularjs/angular.js"></script>
 	<script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
 
+	<script type="text/javascript"src="../js/base_pagination.js"></script>
+    <script type="text/javascript"src="../js/service/brandService.js"></script>
+	<script type="text/javascript"src="../js/controller/baseController.js"></script>
+	<script type="text/javascript"src="../js/controller/brandController.js"></script>
+
     
 </head>
 <script type="text/javascript">
-	var app=angular.module("pinyougou",['pagination']);
-	app.controller("brandController",function ($scope, $http) {
+	/*var app=angular.module("pinyougou",['pagination']);*/
+	/*app.controller("brandController",function ($scope, $http) {
 	    $scope.reloadList=function(){
 	        $scope.search($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-		}
-		$scope.paginationConf={
+		}*/
+	/*	$scope.paginationConf={
 	        currentPage:1,
 	       // totalItems:10,
 			itemsPerPage:10,
@@ -31,9 +36,9 @@
 			onChange:function () {
 				$scope.reloadList();
             }
-		}
+		}*/
 
-		$scope.searchEntity={};
+	/*	$scope.searchEntity={};
 		$scope.search=function(page,rows){
 		    $http.post('../brand/search.do?page='+page+'&rows='+rows,$scope.searchEntity).success(
 		        function (response) {
@@ -41,9 +46,9 @@
 					$scope.paginationConf.totalItems=response.total;
                 }
 			)
-		}
+		}*/
 		
-		$scope.save=function () {
+		/*$scope.save=function () {
 	        var methodName="add";
 	        if($scope.entity.id!=null){
 					methodName="update";
@@ -58,16 +63,16 @@
 					}
                 }
 			)
-        }
+        }*/
         
-        $scope.findOne=function (id) {
+    /*    $scope.findOne=function (id) {
 			$http.get("../brand/findOne.do?id="+id).success(
 			    function (response) {
 				$scope.entity=response;
             })
-        }
+        }*/
 
-		 $scope.selectIds=[];
+		/* $scope.selectIds=[];
 	    $scope.updateSelection=function ($event,id) {
 			if($event.target.checked){
 			    $scope.selectIds.push(id);
@@ -76,9 +81,9 @@
 			    $scope.selectIds.splice(idx,1);
 			}
 
-        }
+        }*/
 
-        $scope.dele=function () {
+      /*  $scope.dele=function () {
 			$http.get('../brand/delete.do?ids='+$scope.selectIds).success(
 			    function (response) {
 					if(response.success){
@@ -93,7 +98,7 @@
 
 
 
-    })
+    })*/
 </script>
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="brandController" ng-init="findAll()">
   <!-- .box-body -->
