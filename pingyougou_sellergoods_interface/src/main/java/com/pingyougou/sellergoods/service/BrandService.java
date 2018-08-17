@@ -1,28 +1,65 @@
 package com.pingyougou.sellergoods.service;
+import java.util.List;
+import java.util.Map;
 
-import com.pingyougou.pojo.PageResult;
+import entity.PageResult;
 import com.pingyougou.pojo.TbBrand;
 
-import java.util.List;
-
 /**
- * @author yin
- * @Date 2018/8/11 22:11
- * @Method
+ * 服务层接口
+ * @author Administrator
+ *
  */
-
 public interface BrandService {
-    List<TbBrand> findAll();
 
-    public PageResult<TbBrand> findPage(int pageNum, int pageSize);
+	/**
+	 * 返回全部列表
+	 * @return
+	 */
+	public List<TbBrand> findAll();
+	
+	
+	/**
+	 * 返回分页列表
+	 * @return
+	 */
+	public PageResult findPage(int pageNum, int pageSize);
+	
+	
+	/**
+	 * 增加
+	*/
+	public void add(TbBrand brand);
+	
+	
+	/**
+	 * 修改
+	 */
+	public void update(TbBrand brand);
+	
 
-    void add(TbBrand tbBrand);
+	/**
+	 * 根据ID获取实体
+	 * @param id
+	 * @return
+	 */
+	public TbBrand findOne(Long id);
+	
+	
+	/**
+	 * 批量删除
+	 * @param ids
+	 */
+	public void delete(Long [] ids);
 
-    void update(TbBrand tbBrand);
-    TbBrand findOne(Long id);
+	/**
+	 * 分页
+	 * @param pageNum 当前页 码
+	 * @param pageSize 每页记录数
+	 * @return
+	 */
+	public PageResult<TbBrand> search(TbBrand tbBrand, int pageNum, int pageSize);
 
-    void delete(Long[] ids);
-
-    PageResult<TbBrand> search(TbBrand tbBrand, int page, int rows);
+    List<Map> selectOptionList();
 }
 

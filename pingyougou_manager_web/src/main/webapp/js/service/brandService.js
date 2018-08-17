@@ -17,4 +17,7 @@ app.service('brandservice',function ($http) {
     this.dele=function (ids){
         return $http.get('../brand/delete.do?ids='+ids);
     }
+    this.selectOptionList=function () {
+        return $http.get("../brand/selectOptionList.do")
+    }
 })

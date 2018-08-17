@@ -6,7 +6,7 @@
 
 
 
-<context:property-placeholder location="classpath:properties/*.properties"/>
+    <context:property-placeholder location="classpath:properties/*.properties"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close">

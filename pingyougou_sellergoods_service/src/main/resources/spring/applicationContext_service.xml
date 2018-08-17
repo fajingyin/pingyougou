@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 <dubbo:application name="pingyougou-sellergoods"></dubbo:application>
-    <dubbo:registry protocol="zookeeper" address="192.168.126.99" port="2181"></dubbo:registry>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"></dubbo:registry>
     <dubbo:protocol name="dubbo" port="2080"></dubbo:protocol>
     <dubbo:annotation package="com.pingyougou.sellergoods.service"></dubbo:annotation>
 

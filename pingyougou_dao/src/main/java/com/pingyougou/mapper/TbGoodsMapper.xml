@@ -126,7 +126,7 @@
       #{price,jdbcType=DECIMAL}, #{typeTemplateId,jdbcType=BIGINT}, #{isEnableSpec,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.pingyougou.pojo.TbGoods" >
+  <insert id="insertSelective" parameterType="com.pingyougou.pojo.TbGoods" useGeneratedKeys="true" keyProperty="id">
     insert into tb_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

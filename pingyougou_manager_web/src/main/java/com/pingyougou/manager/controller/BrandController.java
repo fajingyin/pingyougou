@@ -1,15 +1,15 @@
 package com.pingyougou.manager.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.pingyougou.pojo.PageResult;
-import com.pingyougou.pojo.Result;
+import entity.PageResult;
+import entity.Result;
 import com.pingyougou.pojo.TbBrand;
 import com.pingyougou.sellergoods.service.BrandService;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yin
@@ -80,5 +80,10 @@ public class BrandController {
     @RequestMapping("/search")
     public PageResult<TbBrand> search(@RequestBody TbBrand tbBrand,@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int rows){
         return brandService.search(tbBrand,page,rows);
+    }
+
+    @RequestMapping("/selectOptionList")
+    public List<Map> selectOptionList(){
+        return  brandService.selectOptionList();
     }
 }

@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pingyougou.mapper.TbBrandMapper;
-import com.pingyougou.pojo.PageResult;
+import entity.PageResult;
 import com.pingyougou.pojo.TbBrand;
 import com.pingyougou.pojo.TbBrandExample;
 import com.pingyougou.sellergoods.service.BrandService;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yin
@@ -61,6 +62,11 @@ public class BrandServiceImpl implements BrandService {
 
     }
 
+  /*  @Override
+    public PageResult findPage(TbBrand brand, int pageNum, int pageSize) {
+        return null;
+    }
+*/
     @Override
     public PageResult<TbBrand> search(TbBrand tbBrand, int page, int rows) {
         PageHelper.startPage(page,rows);
@@ -77,6 +83,12 @@ public class BrandServiceImpl implements BrandService {
        Page<TbBrand> pages = (Page<TbBrand>) tbBrandMapper.selectByExample(example);
 
         return new PageResult<>(pages.getTotal(),pages.getResult());
+    }
+
+    @Override
+    public List<Map> selectOptionList() {
+
+        return tbBrandMapper.selectOptionList();
     }
 
 

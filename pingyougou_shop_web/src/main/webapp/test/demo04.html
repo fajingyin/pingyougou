@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+      <script type="text/javascript">
+      	var app=angular.module('myApp',[]);
+ 		app.controller('myController',function($scope){
+      	//$scope.list= [100,192,203,434 ];//定义数组
+      	$scope.list=[{name:'张三',shuxue:100,yuwen:90},
+      					{name:'李四',shuxue:80,yuwen:70},
+      					{name:'王五',shuxue:60,yuwen:98}]
+      		});
+      </script>
+
+      
+    </head >
+
+   
+    <body ng-app="myApp" ng-controller="myController">
+     <table>
+     	<tr>
+     		<td>姓名</td>
+     		<td>数学</td>
+     		<td>语文</td>
+
+     	</tr>
+    	<tr ng-repeat="x in list">
+    	<td>{{x.name}}</td>
+    	<td>{{x.shuxue}}</td>
+    	<td>{{x.yuwen}}</td>
+    </tr>
+	</table>
+    </body>
+</html> 

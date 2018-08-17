@@ -15,7 +15,7 @@ app.controller('brandController',function ($scope,$controller,brandservice) {
         if($scope.entity.id){
             serviceObject=brandservice.update($scope.entity);
         }else{
-            serviceObject=brandService.add($scope.entity);
+            serviceObject=brandservice.add($scope.entity);
         }
 
         serviceObject.success(
@@ -31,7 +31,7 @@ app.controller('brandController',function ($scope,$controller,brandservice) {
     }
 
     $scope.findOne=function (id) {
-        brandservice.findOne().success(
+        brandservice.findOne(id).success(
             function (response) {
                 $scope.entity=response;
             })
