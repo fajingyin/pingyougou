@@ -9,7 +9,6 @@ import entity.Result;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -121,16 +120,26 @@ public class GoodsController {
     /**
      * 查询+分页
      *
-     * @param
+     * @param brand
      * @param page
      * @param rows
      * @return
      */
     @RequestMapping("/search")
     public PageResult search(@RequestBody TbGoods goods, int page, int rows) {
-        String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
-        goods.setSellerId(sellerId);
         return goodsService.findPage(goods, page, rows);
+    }
+
+    @RequestMapping("updateStatus")
+    public Result updateStatus(Long[] ids,String status) {
+
+        try {
+            goodsService.updateStatus(ids, status);
+            return new Result(true,"更改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, "更改失败");
+        }
     }
 
 

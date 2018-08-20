@@ -34,7 +34,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	//保存 
 	$scope.save=function(){				
 		var serviceObject;//服务层对象
-		$scope.entity.typeId = $scope.entity.typeId.id;
+		//$scope.entity.typeId = $scope.entity.typeId.id;
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=itemCatService.update( $scope.entity ); //修改  
 		}else{

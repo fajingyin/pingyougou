@@ -14,10 +14,29 @@
     <link rel="stylesheet" href="../css/style.css">
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- 分页组件开始 -->
+
+	<script type="text/javascript"src="../plugins/angularjs/angular.min.js"></script>
+	<!-- 分页组件开始 -->
+	<script src="../plugins/angularjs/pagination.js"></script>
+
+	<link rel="stylesheet"href="../plugins/angularjs/pagination.css">
+
+
+	<script type="text/javascript" src="../plugins/angularjs/angular.js"></script>
+	<script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
+	<script type="text/javascript"src="../js/base_pagination.js"></script>
+	<script type="text/javascript"src="../js/service/contentService.js"></script>
+	<script type="text/javascript"src="../js/service/uploadService.js"></script>
+	<script type="text/javascript"src="../js/service/contentCategoryService.js"></script>
+	<script type="text/javascript"src="../js/controller/baseController.js"></script>
+	<script type="text/javascript"src="../js/controller/contentController.js"></script>
+	<script type="text/javascript" src="../plugins/select2/angular-select2.js"></script>
     
 </head>
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="contentController" ng-init="findContentCategoryList()">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -66,17 +85,17 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
-			                              <td><input  type="checkbox"></td>			                              
-				                          <td>1</td>
-									      <td>1</td>
-									      <td>促销海报1</td>
-									      <td>http://wwww.hb.com/hd1.html</td>
+			                          <tr ng-repeat="entity in list">
+			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
+				                          <td>{{entity.id}}</td>
+									      <td>{{entity.categroyId}}</td>
+									      <td>{{entity.title}}</td>
+									      <td>{{entity.url}}</td>
 									      <td>
-									      	<img alt="" src="" width="100px" height="50px">
+									      	<img alt="" src="{{entity.pic}}" width="100px" height="50px">
 									      </td>
-									      <td>1</td>
-									      <td>有效</td>									     								     
+									      <td>{{entity.sortOrder}}</td>
+									      <td>{{statusList[entity.status]}}</td>
 		                                  <td class="text-center">                                           
 		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">修改</button>                                           
 		                                  </td>
@@ -104,7 +123,7 @@
 				<tr>
 		      		<td>广告分类</td>
 		      		<td>
-		      			<select class="form-control" ng-model="entity.categoryId" ng-options="item.id as item.name for item in options['content_category'].data">
+		      			<select class="form-control" ng-model="entity.categoryId" ng-options="item.id as item.name for item in contentCategoryList">
 		                </select>
 		      		</td>
 		      	</tr>
@@ -154,7 +173,7 @@
 	  </div>
 	</div>
 </div>
-
+<tm-pagination conf="paginationConf"></tm-pagination>
 </body>
 
 </html>

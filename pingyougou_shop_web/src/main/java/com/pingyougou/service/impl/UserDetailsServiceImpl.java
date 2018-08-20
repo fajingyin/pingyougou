@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  * @Date 2018/8/15 22:22
  * @Method
  */
-@Service
+
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Reference
+
     private SellerService sellerService;
 
     public void setSellerService(SellerService sellerService) {

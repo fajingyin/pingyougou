@@ -21,18 +21,18 @@
     <!--引用dubbo服务-->
     <dubbo:application name="pingyougou-shop-web"></dubbo:application>
     <dubbo:registry address="zookeeper://192.168.25.133:2181"/>
- <!-- <dubbo:reference id="sellerService" interface="com.pingyougou.sellergoods.service.SellerService">
+    <dubbo:reference id="service" interface="com.pingyougou.sellergoods.service.SellerService">
     </dubbo:reference>
 
 
         <beans:bean id="shopUserDetailService" class="com.pingyougou.service.impl.UserDetailsServiceImpl">
-            <beans:property name="sellerService" ref="sellerService"></beans:property>
-        </beans:bean>-->
+            <beans:property name="sellerService" ref="service"></beans:property>
+        </beans:bean>
 
     <beans:bean id="bcryptEncoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-   <dubbo:annotation package="com.pingyougou.service"></dubbo:annotation>
+   <!--<dubbo:annotation package="com.pingyougou.service"></dubbo:annotation>-->
     <!--页面拦截规则-->
     <http use-expressions="false">
         <intercept-url pattern="/**" access="ROLE_SELLER"/>
@@ -49,11 +49,10 @@
 
     <!--认证管理-->
     <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="userDetailService" >
+        <authentication-provider user-service-ref="shopUserDetailService" >
                 <password-encoder ref="bcryptEncoder"></password-encoder>
         </authentication-provider>
     </authentication-manager>
-    <beans:bean name="userDetailService" class="com.pingyougou.service.impl.UserDetailsServiceImpl"></beans:bean>
 
 
 
