@@ -13,6 +13,7 @@ import com.pingyougou.pojo.TbItemCatExample.Criteria;
 import com.pingyougou.sellergoods.service.ItemCatService;
 
 import entity.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 服务实现层
@@ -24,6 +25,8 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	/**
 	 * 查询全部
@@ -48,7 +51,8 @@ public class ItemCatServiceImpl implements ItemCatService {
 	 */
 	@Override
 	public void add(TbItemCat itemCat) {
-		itemCatMapper.insert(itemCat);		
+		itemCatMapper.insert(itemCat);
+        updateCa();
 	}
 
 	
@@ -58,6 +62,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 	@Override
 	public void update(TbItemCat itemCat){
 		itemCatMapper.updateByPrimaryKey(itemCat);
+        updateCa();
 	}	
 	
 	/**
@@ -80,7 +85,8 @@ public class ItemCatServiceImpl implements ItemCatService {
 		for(Long id:ids){
 
             deleCas(id);
-		}		
+		}
+        updateCa();
 	}
 
     private void deleCas(Long id) {
@@ -94,6 +100,15 @@ public class ItemCatServiceImpl implements ItemCatService {
                 deleCas(tbItemCat.getId());
             }
         }
+
+
+    }
+
+    private void updateCa() {
+        List<TbItemCat> list = findAll();
+        for (TbItemCat tbItemCat : list) {
+            redisTemplate.boundHashOps("itemCat").put(tbItemCat.getName(),tbItemCat.getId());
+        }
     }
 
 
@@ -103,7 +118,9 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 		TbItemCatExample.Criteria criteria = example.createCriteria();
 		criteria.andParentIdEqualTo(parentId);
-		List<TbItemCat> tbItemCats = itemCatMapper.selectByExample(example);
+
+
+        List<TbItemCat> tbItemCats = itemCatMapper.selectByExample(example);
 		return tbItemCats;
 	}
 
